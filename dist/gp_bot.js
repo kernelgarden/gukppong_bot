@@ -1,34 +1,38 @@
 "use strict";
-/**
- * A ping pong bot, whenever you send "ping", it replies "pong".
- */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Import the discord.js module
 const discord_js_1 = __importDefault(require("discord.js"));
+const message_dispatcher_1 = require("./message_dispatcher");
 class GPBot {
     constructor() {
-        // Create an instance of a Discord client
-        const client = new discord_js_1.default.Client();
-        /**
-         * The ready event is vital, it means that only _after_ this will your bot start reacting to information
-         * received from Discord
-         */
-        client.on('ready', () => {
+        this.initialize();
+        this.login();
+    }
+    Dispatcher() {
+        return this.dispatcher;
+    }
+    initialize() {
+        this.client = new discord_js_1.default.Client();
+        this.client.on('ready', () => {
             console.log('I am ready!');
         });
-        // Create an event listener for messages
-        client.on('message', message => {
-            // If the message is "ping"
-            if (message.content === 'ping') {
-                // Send "pong" to the same channel
-                message.channel.send('pong');
-            }
+        this.dispatcher = new message_dispatcher_1.MessageDispatcher();
+        this.client.on('message', async (message) => {
+            let result = await this.dispatcher.dispatch(message);
+            console.log(result);
         });
-        // Log our bot in using the token from https://discordapp.com/developers/applications/me
-        client.login('your token here');
+    }
+    async login() {
+        try {
+            await this.client.login('NTg2Mzk2NTk2ODkyMzM2MTI4.XPnbaQ.egh4EqgjF3FCBSELSXbrMG04wx8');
+            return true;
+        }
+        catch (err) {
+            console.error(err);
+            return false;
+        }
     }
 }
 exports.GPBot = GPBot;
