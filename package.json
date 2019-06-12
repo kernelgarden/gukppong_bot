@@ -14,7 +14,8 @@
     "@types/js-priority-queue": "0.0.5",
     "discord.js": "github:discordjs/discord.js",
     "discord.js-typings": "github:discordjs/discord.js-typings",
-    "js-priority-queue": "^0.1.5"
+    "js-priority-queue": "^0.1.5",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",

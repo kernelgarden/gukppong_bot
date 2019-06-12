@@ -39,7 +39,7 @@ export class Schedular {
         if (this.reserved_timer_handler != null)
             clearTimeout(this.reserved_timer_handler);
 
-        this.reserved_timer_handler = setTimeout(this.wake_up, left_time);
+        this.reserved_timer_handler = setTimeout(this.wake_up.bind(this), left_time);
     }
 
     private process_jobs() {

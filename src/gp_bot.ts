@@ -1,4 +1,4 @@
-import Discord, { Message } from "discord.js";
+import Discord, { Message, TextChannel } from "discord.js";
 import { MessageDispatcher } from "./message_dispatcher";
 
 export class GPBot {
@@ -29,6 +29,21 @@ export class GPBot {
             let result = await this.dispatcher.dispatch(message);
             console.log(result);
         });
+    }
+
+    public async broadcast_all_channel(msg: string): Promise<boolean> {
+        try {
+            this.client.channels.forEach((value, _key, _map) => {
+                if (value.type === "text") {
+                    let channel = value as TextChannel;
+                    channel.send(msg);
+                }
+            });
+            return true;
+        } catch(err) {
+            console.error(err);
+            return false;
+        }
     }
 
     public async send_message(msg: string, channel: Discord.TextChannel): Promise<boolean> {
