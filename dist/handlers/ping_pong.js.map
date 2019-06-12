@@ -1,1 +1,0 @@
-{"version":3,"file":"ping_pong.js","sourceRoot":"","sources":["../../src/handlers/ping_pong.ts"],"names":[],"mappings":";;AAGO,KAAK,UAAU,iBAAiB,CAAC,OAAwB;IAC5D,IAAI,OAAO,CAAC,OAAO,KAAK,MAAM,EAAE;QAC5B,OAAO,CAAC,OAAO,CAAC,IAAI,CAAC,MAAM,CAAC,CAAC;KAChC;IAED,OAAO,IAAI,CAAC;AAChB,CAAC;AAND,8CAMC"}
