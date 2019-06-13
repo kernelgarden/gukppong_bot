@@ -12,10 +12,14 @@
   "license": "ISC",
   "dependencies": {
     "@types/js-priority-queue": "0.0.5",
+    "@types/request": "^2.48.1",
+    "@types/request-promise-native": "^1.0.16",
     "discord.js": "github:discordjs/discord.js",
     "discord.js-typings": "github:discordjs/discord.js-typings",
     "js-priority-queue": "^0.1.5",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7"
   },
   "devDependencies": {
     "@types/chai": "^4.1.7",
