@@ -57,7 +57,9 @@ export class StatsAPIParser {
         const url = this.make_schedule_url(date);
 
         try {
-            return await rp(this.make_option(url));
+            let result = await rp(this.make_option(url));
+            console.debug(result);
+            return result;
         } catch(err) {
             console.error(err);
             return null;
@@ -65,6 +67,15 @@ export class StatsAPIParser {
     }
 
     public async request_live_game(game_id: number, start_time: Date = null): Promise<Game> {
-        return null;
+        const url = this.make_live_game_url(game_id, start_time);
+
+        try {
+            let result = await rp(this.make_option(url));
+            console.debug(result);
+            return result;
+        } catch(err) {
+            console.error(err);
+            return null;
+        }
     }
 }
