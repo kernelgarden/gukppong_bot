@@ -26,6 +26,59 @@ export interface GameSchedule {
     gamePK: number;
     link: string;
     gameType: string;
+    rescheduledFrom: string;
+    venue: Venue;
+    content: Content;
+    isTie: boolean,
+    gameNumber: boolean,
+    publicFacing: boolean,
+    doubleHeader: GameHeaderType
+
+    /*
+    "gamedayType":"P",
+    "tiebreaker":"N",
+    "calendarEventID":"14-567491-2019-06-11",
+    "seasonDisplay":"2019",
+    "dayNight":"day",
+    "description":"Makeup of 6/10 PPD",
+    "scheduledInnings":9,
+    "gamesInSeries":2,
+    "seriesGameNumber":1,
+    "seriesDescription":"Regular Season",
+    "recordSource":"S",
+    "ifNecessary":"N",
+    "ifNecessaryDescription":"Normal Game"
+    */
+}
+
+export interface GameStatus {
+    abstractGameState: State;
+    codedGameState: StateCode;
+    detailedState: State;
+    statusCode: StateCode;
+    abstractGameCode: StateCode
+}
+
+export interface Venue {
+    id: number;
+    name: string;
+    link: string;
+}
+
+export interface Content {
+    link: string;
+}
+
+//TODO
+export type State = "Final";
+
+//TODO
+export type StateCode = "F";
+
+//Check
+export enum GameHeaderType {
+    single = "S",
+    double = "D"
 }
 
 /*

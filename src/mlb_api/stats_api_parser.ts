@@ -57,8 +57,8 @@ export class StatsAPIParser {
         const url = this.make_schedule_url(date);
 
         try {
-            let result = await rp(this.make_option(url));
-            console.debug(result);
+            let result: GameSchedule = await rp(this.make_option(url));
+            console.debug(result.dates[0].games[0]);
             return result;
         } catch(err) {
             console.error(err);
