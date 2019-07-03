@@ -1,0 +1,1 @@
+export const discord_bot_key: string = "NTg2Mzk2NTk2ODkyMzM2MTI4.XPnbaQ.egh4EqgjF3FCBSELSXbrMG04wx8";

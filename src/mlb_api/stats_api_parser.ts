@@ -3,6 +3,7 @@ import * as su from "../utils/string_util";
 import moment from "moment";
 import { GameSchedule } from "./game_schedule";
 import { Game } from "./game";
+import { ApiService, ApiResponse } from "../api_service";
 
 export class StatsAPIParser {
     private base_url: string = "http://statsapi.mlb.com/api";
@@ -57,9 +58,14 @@ export class StatsAPIParser {
         const url = this.make_schedule_url(date);
 
         try {
-            let result: GameSchedule = await rp(this.make_option(url));
-            console.debug(result.dates[0].games[0]);
-            return result;
+            //let result: GameSchedule = await rp(this.make_option(url));
+            let result: ApiResponse<GameSchedule> = await new ApiService()
+                .uri(url)
+                .method("GET")
+                .send();
+
+            console.debug(result.response.dates[0].games[0]);
+            return result.response;
         } catch(err) {
             console.error(err);
             return null;

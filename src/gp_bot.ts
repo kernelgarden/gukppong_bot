@@ -1,5 +1,6 @@
 import Discord, { Message, TextChannel } from "discord.js";
 import { MessageDispatcher } from "./message_dispatcher";
+import { discord_bot_key } from "./constants";
 
 export class GPBot {
     private client: Discord.Client;
@@ -27,7 +28,7 @@ export class GPBot {
 
         this.client.on('message', async message => {
             let result = await this.dispatcher.dispatch(message);
-            console.log(result);
+            //console.log(result);
         });
     }
 
@@ -58,7 +59,8 @@ export class GPBot {
 
     public async login(): Promise<boolean> {
         try {
-            await this.client.login('NTg2Mzk2NTk2ODkyMzM2MTI4.XPnbaQ.egh4EqgjF3FCBSELSXbrMG04wx8');
+            const api_key = discord_bot_key;
+            await this.client.login(discord_bot_key);
             return true;
         } catch(err) {
             console.error(err);

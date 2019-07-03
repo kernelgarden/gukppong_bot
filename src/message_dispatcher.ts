@@ -15,6 +15,12 @@ export class MessageDispatcher {
         this.handlers.push(handler);
     }
 
+    public add_handlers(handlers: Array<MessageHandlerFunc>) {
+        handlers.forEach((handler: MessageHandlerFunc) => {
+            this.add_handler(handler);
+        });
+    }
+
     public async dispatch(message: Discord.Message) {
         for (var i = 0; i < this.handlers.length; i++) {
             try {

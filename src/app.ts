@@ -1,9 +1,9 @@
 import { GPBot } from "./gp_bot";
-import { MessageDispatcher } from "./message_dispatcher";
+import { MessageDispatcher, MessageHandlerFunc } from "./message_dispatcher";
 import { ping_pong_handler } from "./handlers/ping_pong";
 
 const gpBot = new GPBot();
 gpBot.login();
 
-let dispatcher: MessageDispatcher = gpBot.Dispatcher();
-dispatcher.add_handler(ping_pong_handler);
+const handlers = new Array<MessageHandlerFunc>(ping_pong_handler);
+gpBot.Dispatcher().add_handlers(handlers);
