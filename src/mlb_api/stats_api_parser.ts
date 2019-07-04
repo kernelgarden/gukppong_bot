@@ -1,4 +1,3 @@
-import rp from "request-promise-native";
 import * as su from "../utils/string_util";
 import moment from "moment";
 import { GameSchedule } from "./game_schedule";
@@ -44,28 +43,22 @@ export class StatsAPIParser {
         return this.base_url + "/" + rest_url;
     }
 
-    private make_option(full_url: string): rp.Options {
-        return {
-            url: full_url,
-            headers: {
-                'User-Agent': 'gukppong_bot'
-            },
-            json: true
-        }
-    }
-
     public async request_schedule(date: Date): Promise<GameSchedule> {
         const url = this.make_schedule_url(date);
 
         try {
-            //let result: GameSchedule = await rp(this.make_option(url));
-            let result: ApiResponse<GameSchedule> = await new ApiService()
+            let response: ApiResponse<GameSchedule> = await new ApiService()
                 .uri(url)
                 .method("GET")
                 .send();
 
-            console.debug(result.response.dates[0].games[0]);
-            return result.response;
+            if (response.result === "Success") {
+                console.debug(response.response.dates[0].games[0]);
+                return response.response;
+            } else {
+                console.error(response.error);
+                return null;
+            }
         } catch(err) {
             console.error(err);
             return null;
@@ -76,9 +69,18 @@ export class StatsAPIParser {
         const url = this.make_live_game_url(game_id, start_time);
 
         try {
-            let result = await rp(this.make_option(url));
-            console.debug(result);
-            return result;
+            let response: ApiResponse<Game> = await new ApiService()
+                .uri(url)
+                .method("GET")
+                .send();
+            
+            if (response.result === "Success") {
+                console.debug(response);
+                return response;
+            } else {
+                console.error(response.error);
+                return null;
+            }
         } catch(err) {
             console.error(err);
             return null;
